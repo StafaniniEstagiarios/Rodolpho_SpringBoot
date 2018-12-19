@@ -3,9 +3,12 @@ package com.stefanini.estudo.source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import com.stefanini.estudo.model.Student;
 import com.stefanini.estudo.source.services.StudentService;
 
+import java.rmi.StubNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,4 +47,13 @@ public class StudentSources {
 		service.update(id, student);		
 		return ResponseEntity.ok().build();
 	}
+	
+	@DeleteMapping(value="/students/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id)
+	{
+		service.delete(id);
+		return ResponseEntity.ok().build();
+	}
+	
+	
 }
