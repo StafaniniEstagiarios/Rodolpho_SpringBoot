@@ -11,46 +11,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stefanini.estudo.model.Endereco;
-import com.stefanini.estudo.source.services.EnderecoService;
+import com.stefanini.estudo.model.Curso;
+import com.stefanini.estudo.source.services.CursoService;
 
 @RestController
-@RequestMapping(value="/endereco")
-public class EnderecoSource {
-	
+@RequestMapping("/cursos")
+public class CursoSource {
+
 	@Autowired
-	EnderecoService service;
-	
+	private CursoService service;
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Endereco> findById(@PathVariable Integer id){
+	public ResponseEntity<Curso> findById(@PathVariable Integer id){
 		
 		
 		return ResponseEntity.ok().body(service.findById(id));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> create(@RequestBody Endereco endereco){
+	public ResponseEntity<Void> create(@RequestBody Curso curso){
 		
-		service.create(endereco);
+		service.create(curso);
 		return ResponseEntity.ok().build();
 		
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Endereco>> findAll(){
+	public ResponseEntity<List<Curso>> findAll(){
 		
-		List<Endereco> enderecos = service.findAll();
+		List<Curso> cursos = service.findAll();
 		
-		return ResponseEntity.ok().body(enderecos);
+		return ResponseEntity.ok().body(cursos);
 	}
 	
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void> update(@PathVariable Integer id,@RequestBody Endereco endereco){
+	public ResponseEntity<Void> update(@PathVariable Integer id,@RequestBody Curso endereco){
 		
 		service.update(id, endereco);
 		
@@ -64,5 +62,5 @@ public class EnderecoSource {
 		
 		return ResponseEntity.ok().build();
 	}
-
+	
 }

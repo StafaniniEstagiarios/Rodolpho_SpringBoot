@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -20,12 +22,15 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
 	private String rua;
+	
 	private String bairro;
+	
 	private Integer numero;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="endereco")
+	@OneToMany(mappedBy="endereco", targetEntity =Student.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Student> students = new ArrayList<>();
 	
 	public Integer getId() {

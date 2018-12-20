@@ -1,18 +1,13 @@
 package com.stefanini.estudo.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Student implements Serializable {
@@ -33,13 +28,11 @@ public class Student implements Serializable {
 	private Endereco endereco;
 	
 	
-	 @ManyToMany
-	 @JoinTable(
-			 name="STUDENT_CURSO",
-			 joinColumns = @JoinColumn(name = "student_id"),
-			 inverseJoinColumns = @JoinColumn(name = "curso_id")
-	)
+	/*@ManyToMany
 	private List<Curso> cursos = new ArrayList<>();
+*/	
+	/*@OneToOne(mappedBy="curso")
+	private StudentCurso studentCurso;*/
 	
 	@Override
 	public int hashCode() {
@@ -87,29 +80,47 @@ public class Student implements Serializable {
 		this.matricula = matricula;
 	}
 
-
-
-
-
 	public Student() {
 		super();
 	}
 
+	
 
-	public Student(Integer id, String nome, String matricula, Endereco endereco, List<Curso> cursos) {
+
+
+
+
+@Override
+	public String toString() {
+		return "Student [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", endereco=" + endereco + "]";
+	}
+
+
+public Student(Integer id, String nome, String matricula, Endereco endereco, StudentCurso studentCurso) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.matricula = matricula;
 		this.endereco = endereco;
-		this.cursos = cursos;
+		//this.studentCurso = studentCurso;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", cursos=" + cursos + "]";
+//
+//	@Override
+//	public String toString() {
+//		return "Student [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", cursos=" + cursos + "]";
+//	}
+
+
+	/*public StudentCurso getStudentCurso() {
+		return studentCurso;
 	}
+*/
+
+	/*public void setStudentCurso(StudentCurso studentCurso) {
+		this.studentCurso = studentCurso;
+	}*/
 
 
 	public Endereco getEndereco() {
@@ -122,14 +133,14 @@ public class Student implements Serializable {
 	}
 
 
-	public List<Curso> getCursos() {
-		return cursos;
-	}
+//	public List<Curso> getCursos() {
+//		return cursos;
+//	}
 
 
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+//	public void setCursos(List<Curso> cursos) {
+//		this.cursos = cursos;
+//	}
 
 
 	

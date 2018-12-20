@@ -5,6 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.stefanini.estudo.builder.StudentBuilder;
+import com.stefanini.estudo.dto.StudentDTO;
+import com.stefanini.estudo.model.Curso;
 import com.stefanini.estudo.model.Student;
 import com.stefanini.estudo.source.services.StudentService;
 
@@ -26,9 +29,10 @@ public class StudentSources {
 	}
 	
 	@PostMapping(value="/students")
-	public ResponseEntity<Void> create(@RequestBody Student student){
+	public ResponseEntity<Void> create(@RequestBody StudentDTO studentDTO  ){
 		
-		service.create(student);
+		
+		service.createStudent(studentDTO);
 		
 		return ResponseEntity.ok().build();
 	}
